@@ -21,18 +21,13 @@ module Twine
             end
             
             def read(io, lang)
-                begin
-                    require "json"
-                rescue LoadError
-                    raise Twine::Error.new "You must run `gem install json` in order to read or write flutter files."
-                end
+                require "json"
                 
                 json = JSON.load(io)
                 json.each do |key, value|
                     if key == "@@locale"
                         # Ignore because it represents the file lang
                     elsif key[0,1] == "@"
-                        description_value = "{\n        \"description\":\"#{value}\"\n    }"
                         if value["description"]
                             set_comment_for_key(key[1..-1], value["description"])
                         end
@@ -67,16 +62,22 @@ module Twine
             end
 
             def format_definition(definition, lang)
-                [format_key_value(definition, lang), format_comment(definition, lang)].compact.join(",\n")
+                [format_key_value(definition, lang), format_comment_and_placeholders(definition, lang)].compact.join(",\n")
             end
             
             def key_value_pattern
                 "    \"%{key}\": \"%{value}\""
             end
 
-            def format_comment(definition, lang)
-                "    \"@#{definition.key}\": {\n        \"description\": \"#{definition.comment}\"\n    }" if definition.comment
-              end
+            def format_comment_and_placeholders(definition, lang)
+                placeholdersScan = definition.translation_for_lang(lang).scan(/{[a-zA-Z0-9\-\_\.]+}/m)
+                if definition.comment || !placeholdersScan.empty?
+                    comment = "        \"description\": \"#{definition.comment}\"" if definition.comment
+                    placeholders = placeholdersScan.map! { |placeholder| "            \"#{placeholder.tr('{}','')}\": {}" }.join(",\n") if !placeholdersScan.empty?
+                    placeholdersBlock = "        \"placeholders\": {\n#{placeholders}\n        }" if placeholders
+                    return "    \"@#{definition.key}\": {\n#{[comment, placeholdersBlock].compact.join(",\n")}\n    }"
+                end
+            end
             
             def format_key(key)
                 escape_quotes(key)

@@ -1,0 +1,33 @@
+{
+    "@@locale": "en",
+
+    "key1": "Text with comment for translators",
+    "@key1": {
+        "description": "comment key1"
+    },
+    "key2": "Simple text",
+
+    "key3": "Text with {name} placeholder",
+    "@key3": {
+        "placeholders": {
+            "name": {}
+        }
+    },
+    "key4": "Text with double placeholders {1} and {2} and a comment",
+    "@key4": {
+        "description": "comment key4",
+        "placeholders": {
+            "1": {},
+            "2": {}
+        }
+    },
+
+    "key5": "Placeholders with punctuation: {p_1}, {p-1}, {p.1}",
+    "@key5": {
+        "placeholders": {
+            "p_1": {},
+            "p-1": {},
+            "p.1": {}
+        }
+    }
+}

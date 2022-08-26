@@ -1,13 +1,17 @@
 [[Section A]]
     [key1]
-        en = value1-english
+        en = Text with comment for translators
         comment = comment key1
     [key2]
-        en = value2-english
+        en = Simple text
         
 [[Section B]]
     [key3]
-        en = value3-english
+        en = Text with {name} placeholder
     [key4]
-        en = value4-english
+        en = Text with double placeholders {1} and {2} and a comment
         comment = comment key4
+
+[[Section C]]
+    [key5]
+        en = Placeholders with punctuation: {p_1}, {p-1}, {p.1}

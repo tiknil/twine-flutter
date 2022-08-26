@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name            = 'twine-flutter'
-  s.version         = '0.1.0'
-  s.date            = '2022-08-24'
+  s.version         = '0.2.0'
+  s.date            = '2022-08-26'
   s.license         = 'BSD-3-Clause'
   s.summary         = 'Plugin for twine that enables .arb generation for use with Flutter'
   s.description     = s.summary + '.'
@@ -18,4 +18,5 @@ Gem::Specification.new do |s|
   s.test_files      = Dir.glob("test/test_*")
 
   s.add_runtime_dependency 'twine', '~> 1.1.0'
+  s.add_runtime_dependency 'json', '~> 2.6.0'
 end

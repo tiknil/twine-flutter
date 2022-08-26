@@ -1,0 +1,13 @@
+[[Uncategorized]]
+	[key1]
+		en = Text with comment for translators
+		comment = comment key1
+	[key2]
+		en = Simple text
+	[key3]
+		en = Text with {name} placeholder
+	[key4]
+		en = Text with double placeholders {1} and {2} and a comment
+		comment = comment key4
+	[key5]
+		en = Placeholders with punctuation: {p_1}, {p-1}, {p.1}
